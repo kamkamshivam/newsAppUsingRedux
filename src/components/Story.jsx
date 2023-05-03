@@ -1,14 +1,34 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate, Navigate } from "react-router-dom";
 import "../css/Story.css";
 import { useState, useEffect } from "react";
 import ReactHtmlParser from "react-html-parser";
 import { fetchStoryBySlug } from "../api/api";
+import { useDispatch } from "react-redux";
+import { showData } from "../actions";
 
 function Story() {
   const [story, setStory] = useState([]);
   const [text, setText] = useState([]);
   const { slug1, slug2 } = useParams();
   const [showError, setShowError] = useState(false);
+  const navigate = useNavigate;
+
+  // storing the data in object array
+  const dispatch = useDispatch();
+  const [sendData, setSendData] = useState([]);
+
+  // function storySave(){
+  //   return(
+  //     setSendData([
+  //       {
+  //         id: new Date().getTime().toString(),
+  //         img: mainImgUrl,
+  //         auth_name: story["author-name"],
+  //         headline: story.headline
+  //       }
+  //     ])
+  //   )
+  // }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,6 +47,17 @@ function Story() {
   const mainImgUrl =
     "https://gumlet.assettype.com/" + story["hero-image-s3-key"];
 
+  function storySave() {
+    return setSendData([
+      {
+        id: new Date().getTime().toString(),
+        img: mainImgUrl,
+        auth_name: story["author-name"],
+        headline: story.headline,
+      },
+    ]);
+  }
+
   return (
     <>
       {showError && story.length == 0 && (
@@ -42,6 +73,18 @@ function Story() {
               <p className="author">
                 <b>By </b>
                 {story["author-name"]}
+                <div className="story-button-save-div">
+                  <button
+                    className="story-button-save"
+                    onClick={() => {
+                      storySave();
+                      dispatch(showData(sendData));
+                      navigate("/searchsave");
+                    }}
+                  >
+                    SAVE
+                  </button>
+                </div>
               </p>
               <p className="title">{story.headline}</p>
               <p className="summary">{story.subheadline}</p>

@@ -6,6 +6,7 @@ import Nav from "./components/Nav";
 import NewsMain from "./components/NewsMain";
 import Footer from "./components/footer";
 import Search from "./components/Search";
+import SaveLists from "./components/SaveLists";
 
 function App() {
   
@@ -36,8 +37,16 @@ function App() {
           element={
             <Search />
           }
+          
+        />
+        <Route
+          path="/searchsave"
+          element={
+            <SaveLists/>
+          }
         />
       </Routes>
+      
       <div>{Footer()}</div>
     </>
   );
