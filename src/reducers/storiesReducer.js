@@ -1,21 +1,25 @@
-const initialData = { list: [] };
-
-const storiesReducer = (state = initialData, action) => {
-  switch (action.type) {
-    case "SHOWDATA":
-      const { data } = action.payload;
+const initialState = {
+    savedStories: []
+  };
+  
+  const storiesReducer = (state = initialState, action) => {
+    switch (action.type) {
+      case "SHOWDATA":
+        return {
+          ...state,
+          savedStories: [...state.savedStories, action.payload]
+        };
+        case "DELETE_STORY":
       return {
         ...state,
-        list: [
-          ...state.list,
-          { 
-            data: data
-          }
-        ]
+        savedStories: state.savedStories.filter(
+          (story) => story.id !== action.payload
+        ),
       };
-    default:
-      return state;
-  }
-};
-
-export default storiesReducer;
+      default:
+        return state;
+    }
+  };
+  
+  export default storiesReducer;
+  

@@ -1,30 +1,36 @@
-import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteid, showData } from "../actions";
+import React from "react";
+import { deleteStory } from "../actions";
+import "../css/SaveLists.css"
+function SaveLists() {
+  const savedStories = useSelector((state) => state.storiesReducer.savedStories);
+  const dispatch = useDispatch();
 
-const SaveLists = () => {
-    const list = useSelector((state) => state.showData.list)
-    return(
-        <>
-                {list.map((elem) => {
-                return (
-                    <div className="container">
-                        <div className="story-container" key={elem.data.id}>
-                            <img src={elem.data.img} className="img" />
-                            <p className="author">
-                                <b>By </b>
-                                {elem.data.auth_name}
-                                <div className="story-button-save-div">
-                                    <button className="story-button-save">SAVE</button>
-                                </div>
-                            </p>
-                            <p className="title">{elem.data.headline}</p>
-                        </div>
-                    </div>
-                );
-            })}
-        </>
-    )
+  const handleDelete = (storyId) => {
+    dispatch(deleteStory(storyId));
+  };
+
+  if (!savedStories) {
+    return <div>No saved stories found.</div>;
+  }
+
+  return (
+    <div className="save-lists-container">
+      <h2>Saved Stories</h2>
+      <div className="story-list">
+        {savedStories.map((story) => (
+          <div key={story.id} className="story-item">
+            <div className="story-img">
+            <img src={story.imgUrl} alt="Story Image" />
+            </div>
+            <h3>{story.headline}</h3>
+            <p>By {story.authorName}</p>
+            <button onClick={() => handleDelete(story.id)}>Delete</button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export default SaveLists;

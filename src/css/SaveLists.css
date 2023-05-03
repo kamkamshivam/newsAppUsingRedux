@@ -1,0 +1,13 @@
+.story-img img{
+    width: 336.66px;
+    height: 186.19px;
+}
+.story-list{
+    display: grid;
+    /* grid-template-columns: 323px 323px; */
+    grid-template-columns:  repeat(5, 1fr);
+   
+
+    grid-gap: 16px;
+    /* grid-template-rows: repeat(5, 1fr); */
+}

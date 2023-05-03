@@ -1,4 +1,4 @@
-import { useParams, useNavigate, Navigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "../css/Story.css";
 import { useState, useEffect } from "react";
 import ReactHtmlParser from "react-html-parser";
@@ -11,7 +11,7 @@ function Story() {
   const [text, setText] = useState([]);
   const { slug1, slug2 } = useParams();
   const [showError, setShowError] = useState(false);
-  const navigate = useNavigate;
+  const navigate = useNavigate();
 
   // storing the data in object array
   const dispatch = useDispatch();
@@ -47,16 +47,29 @@ function Story() {
   const mainImgUrl =
     "https://gumlet.assettype.com/" + story["hero-image-s3-key"];
 
-  function storySave() {
-    return setSendData([
-      {
-        id: new Date().getTime().toString(),
-        img: mainImgUrl,
-        auth_name: story["author-name"],
-        headline: story.headline,
-      },
-    ]);
-  }
+  // function storySave() {
+  //   return setSendData([
+  //     {
+  //       id: new Date().getTime().toString(),
+  //       img: mainImgUrl,
+  //       auth_name: story["author-name"],
+  //       headline: story.headline,
+  //     },
+  //   ]);
+  // }
+
+  const storySave = () => {
+    const storyData = {
+      imgUrl: mainImgUrl,
+      authorName: story["author-name"],
+      headline: story.headline,
+      id: story.id // Replace with the actual ID property from your story object
+    };
+  
+    dispatch(showData(storyData));
+    navigate("/searchsave");
+  };
+ 
 
   return (
     <>
@@ -78,7 +91,7 @@ function Story() {
                     className="story-button-save"
                     onClick={() => {
                       storySave();
-                      dispatch(showData(sendData));
+                     
                       navigate("/searchsave");
                     }}
                   >

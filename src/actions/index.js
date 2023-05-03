@@ -5,9 +5,9 @@ export const showData = (data) => {
     }
 };
 
-export const deleteid = (id) => {
+export const deleteStory = (storyId) => {
     return {
-        type: "DELETE",
-        payload: id
-    }
-}
+      type: "DELETE_STORY",
+      payload: storyId,
+    };
+  };
