@@ -13,22 +13,11 @@ function Story() {
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
 
-  // storing the data in object array
-  const dispatch = useDispatch();
-  const [sendData, setSendData] = useState([]);
 
-  // function storySave(){
-  //   return(
-  //     setSendData([
-  //       {
-  //         id: new Date().getTime().toString(),
-  //         img: mainImgUrl,
-  //         auth_name: story["author-name"],
-  //         headline: story.headline
-  //       }
-  //     ])
-  //   )
-  // }
+  const dispatch = useDispatch();
+  
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,23 +36,14 @@ function Story() {
   const mainImgUrl =
     "https://gumlet.assettype.com/" + story["hero-image-s3-key"];
 
-  // function storySave() {
-  //   return setSendData([
-  //     {
-  //       id: new Date().getTime().toString(),
-  //       img: mainImgUrl,
-  //       auth_name: story["author-name"],
-  //       headline: story.headline,
-  //     },
-  //   ]);
-  // }
+ 
 
   const storySave = () => {
     const storyData = {
       imgUrl: mainImgUrl,
       authorName: story["author-name"],
       headline: story.headline,
-      id: story.id // Replace with the actual ID property from your story object
+      id: story.id 
     };
   
     dispatch(showData(storyData));
