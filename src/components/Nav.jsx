@@ -129,6 +129,9 @@ function Nav() {
                 <NavLink to="/News-React-api">Subscribe</NavLink>
               </li>
               <li className="itemd">
+                <NavLink to="/searchsave">Saved</NavLink>
+              </li>
+              <li className="itemd">
                 <NavLink to="/News-React-api">Creative Showcase</NavLink>
               </li>
               <li className="itemd">

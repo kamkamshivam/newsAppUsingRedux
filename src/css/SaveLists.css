@@ -5,7 +5,7 @@
 .story-list{
     display: grid;
     /* grid-template-columns: 323px 323px; */
-    grid-template-columns:  repeat(5, 1fr);
+    grid-template-columns:  repeat(3, 1fr);
    
 
     grid-gap: 16px;

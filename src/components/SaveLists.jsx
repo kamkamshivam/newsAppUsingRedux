@@ -15,9 +15,9 @@ function SaveLists() {
   }
 
   return (
-    <div className="save-lists-container">
-      <h2>Saved Stories</h2>
-      <div className="story-list">
+    <div className="container">
+    <div className="story-container1">
+          <div className="story-list">
         {savedStories.map((story) => (
           <div key={story.id} className="story-item">
             <div className="story-img">
@@ -29,6 +29,7 @@ function SaveLists() {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 }
